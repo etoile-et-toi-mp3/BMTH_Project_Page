@@ -13,6 +13,8 @@ import astroExpressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://etoile-et-toi-mp3.github.io', 
+  base: '/BMTH_Project_Page',
   vite: {
     plugins: [tailwindcss()],
   },
