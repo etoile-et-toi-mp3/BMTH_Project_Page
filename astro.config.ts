@@ -17,6 +17,11 @@ export default defineConfig({
   base: '/BMTH_Project_Page',
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
   },
   markdown: {
     remarkPlugins: [remarkMath],

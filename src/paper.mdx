@@ -1,218 +1,301 @@
 ---
-# This title is used for the browser tab and the link-preview card (see the
-# "description" and "thumbnail" keys below). The title displayed at the top of
-# the page is set separately, on the <Header> component in the body.
-title: Academic Project Page Template
-
-# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
+title: "Bring Music The Horizon: Music-Driven 360&deg; Video Generation"
 theme: device
-
-# This is the icon that appears in the user's browser tab. To customize, change the favicon.svg file in /public/, or add your own file to /public/ and change the filename here.
 favicon: favicon.svg
-
-# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
-description: Simple project page template for your research paper, built with Astro and Tailwind
+description: "An emotion-aware pipeline for music-driven 360° video generation and immersive music visualization."
 thumbnail: screenshot-light.png
 ---
 
 import Header from "./components/Header.astro";
-import Video from "./components/Video.astro";
 import HighlightedSection from "./components/HighlightedSection.astro";
-import SmallCaps from "./components/SmallCaps.astro";
 import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
-import ModelViewer from "./components/ModelViewer.astro"
-import TwoColumns from "./components/TwoColumns.astro";
-import YouTubeVideo from "./components/YouTubeVideo.astro";
-import Carousel from "./components/Carousel.astro";
-import CarouselSlide from "./components/CarouselSlide.astro";
-import Wide from "./components/Wide.astro";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
-import { Comparison } from "./components/Comparison.tsx";
+import Video from "./components/Video.astro";
 
-import outside from "./assets/outside.mp4";
-import dogsDiffc from "./assets/dogs-diffc.png"
-import dogsTrue from "./assets/dogs-true.png"
-import dogsMsillm from "@/assets/dogs-msillm.jpg"
+import pipelineOverview from "./assets/pipeline-overview.png";
+import pinkPanorama from "./assets/pink_009.png";
 
 <Header
-  title="Academic Project Page Template"
-  conference="Conference Name"
+  title="Bring Music The Horizon: Music-Driven 360&deg; Video Generation"
+  conference="Under submission to the 3rd Workshop on AVGenL, ECCV 2026"
   authors={[
-    {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "University of Texas at Dallas",
-      notes: ["*", "†"],
-    },
-    { name: "Author Two", institution: "Institution Two", notes: ["*", "†"] },
-    { name: "Author Three", institution: "Institution Three", notes: ["*"] },
-    { name: "Author Four", institution: "Institution Four" },
+    { name: "楊弘奕" },
+    { name: "蔡凱旭" },
+    { name: "傅永威" },
   ]}
   notes={[
-    { symbol: "*", text: "author note one" },
-    { symbol: "†", text: "author note two" },
+    { symbol: "Affiliation", text: " National Yang Ming Chiao Tung University" },
+    { symbol: "Advisor", text: " Yu-Chih Chen" },
   ]}
   links={[
-    { name: "Paper", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:file-pdf-2-line" },
-    { name: "Code", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:github-line" },
-    { name: "arXiv", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "academicons:arxiv" },
-    { name: "Slides", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:slideshow-2-line" },
+    { name: "Paper", url: "./documents/bring-music-the-horizon.pdf", icon: "ri:file-pdf-2-line" },
+    { name: "Poster", url: "./documents/bring-music-the-horizon-poster.pdf", icon: "ri:slideshow-2-line" },
   ]}
 >
-  {/*
-    Optionally place a cover image or video behind the header. Import the
-    asset (from src/assets/, so images are optimized) and pass it through the
-    "background" slot using the Picture or Video component:
-
-      <Picture slot="background" src={cover} alt="" />
-      <Video slot="background" src={outside} controls={false} />
-  */}
-  <Picture slot="background" src={dogsTrue} alt="" priority />
+  <Picture
+    slot="background"
+    src={pinkPanorama}
+    alt="Pink and violet panoramic mountain landscape"
+    priority
+  />
 </Header>
+
+<div class="project-kicker">Music-driven immersive visualization</div>
+
+<p class="lead-copy">
+  From a song and a scene prompt, we generate a 360° visual experience whose
+  atmosphere evolves with the music's <strong>structure</strong> and estimated
+  <strong>emotional trajectory</strong>.
+</p>
+
+<div class="feature-grid not-prose">
+  <div class="feature-card">
+    <span class="feature-index">01</span>
+    <h3>Listen to structure</h3>
+    <p>Extract downbeats and organize the song into four-bar musical units.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-index">02</span>
+    <h3>Translate emotion</h3>
+    <p>Predict valence–arousal conditions and turn them into visual guidance.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-index">03</span>
+    <h3>Enter the scene</h3>
+    <p>Animate panoramic keyframes into temporally connected 360° video.</p>
+  </div>
+</div>
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a template you can use to create a professional-looking, accessible, and performant project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+Music visualization can deepen listeners' understanding and experience by
+translating audio into visual form. Yet many existing approaches rely heavily on
+lyrics or produce flat, rectilinear videos, limiting both their applicability to
+instrumental music and their ability to create an immersive listening experience.
+
+We propose **Bring Music The Horizon**, an emotion-aware pipeline for
+music-driven 360° video generation. Given a song, the system estimates a
+valence–arousal trajectory for every four bars. EmotiCrafter converts these
+conditions into emotion-aware visual guidance, SEGA provides fine-grained
+semantic control for panoramic keyframe generation, and image-to-video models
+synthesize temporally continuous 360° video. The resulting visualization is
+designed to reflect the song's emotional progression and temporal structure.
 
 </HighlightedSection>
 
-## Visuals
+## Why immersive music visualization?
 
-### Image
+Most music visualization is still framed as a conventional screen-based music
+video. We investigate a complementary experience: a listener can look around
+inside a scene while its visual atmosphere changes with the song. The goal is not
+to illustrate lyrics, but to use musical structure and continuous affect as
+conditions for an evolving, immersive scene.
 
-Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
+<div class="note-panel">
+  <strong>Scope.</strong> This work focuses on qualitative, immersive music
+  visualization. The accompanying draft reports demonstrations across different
+  genres and qualitative comparison with From-Sound-To-Sight; it does not report
+  quantitative benchmark scores.
+</div>
 
-<Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-
-### Video
-
-<Video src={outside} />
-
-### Wide visual
-
-I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
-
-<Wide>
-  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-</Wide>
-
-### Figure with caption
-
-Wrap a visual in a `Figure` component to add a caption.
+## Method
 
 <Figure>
-  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
+  <Picture
+    slot="figure"
+    src={pipelineOverview}
+    alt="Pipeline from song analysis through emotion-guided panoramic keyframes to 360-degree video generation"
+  />
+  <Fragment slot="caption">
+    <strong>Pipeline overview.</strong> A song's downbeats and emotional
+    conditions guide panoramic keyframe generation; the keyframes are then
+    animated into a 360° dynamic scene.
+  </Fragment>
 </Figure>
 
-### Comparison slider
+### 1. Music information retrieval
 
-Use the `Comparison` component to compare two visuals with an interactive slider.
+We use All-In-One to estimate downbeat timestamps and functional segments. The
+song is grouped into four-bar units, and a Dynamic Valence–Arousal regressor
+predicts one emotion condition $(v_t, a_t)$ for each unit. This produces a
+time-varying representation of both the musical organization and affective
+trajectory.
 
-<Comparison client:idle >
-  <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Picture slot="itemTwo" src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-</Comparison>
+### 2. Emotion-guided panoramic keyframes
 
-### Tab panels
+A user supplies a base prompt that anchors the visual concept. For each musical
+unit, the base prompt and predicted emotion condition are passed through a
+retrained EmotiCrafter model to obtain an emotional residual. We use that
+residual with SEGA as guidance in the diffusion process, then use SDXL 360° LoRA
+to synthesize an emotion-aligned panoramic keyframe. Retraining EmotiCrafter
+with a custom dataset is intended to reduce unwanted human-activity artifacts
+and produce cleaner, scene-focused outputs.
 
-Tab panels are a great way to display a labeled collection of related visuals without taking up too much space.
+### 3. Temporally connected 360° video
 
-<Tabs defaultValue="true">
-  <TabsList>
-    <TabsTrigger value="true">Ground truth</TabsTrigger>
-    <TabsTrigger value="diffc">DiffC (Flux-dev)</TabsTrigger>
-    <TabsTrigger value="msillm">MS-ILLM</TabsTrigger>
-  </TabsList>
-  <TabsContent value="true">
-    <Picture
-      src={dogsTrue}
-      alt="True photo of two dogs running side-by-side in shallow water"
-    />
-  </TabsContent>
-  <TabsContent value="diffc">
-    <Picture
-      src={dogsDiffc}
-      alt="Photo of two running dogs, lossily compressed using the DiffC algorithm"
-    />
-  </TabsContent>
-  <TabsContent value="msillm">
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </TabsContent>
-</Tabs>
+Each keyframe anchors a four-bar video unit. Wan-I2V generates a dynamic scene
+for the first three bars, while Wan-flf2v generates a transition clip during the
+final bar to connect to the next keyframe. Concatenating these clips in musical
+order yields the final 360° visualization.
 
-### Carousel
+## Results and demos
 
-A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
+The paper demonstrates that the pipeline can generate 360° videos viewable in a
+VR headset. The visual atmosphere and transitions are designed to follow the
+estimated emotion conditions at different musical segments, while the four-bar
+units align scene generation with the song's temporal structure.
 
-<Carousel>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </CarouselSlide>
-</Carousel>
+Each video window below is wired to a future file in `public/videos/`. Until the
+result files are added, the supplied panoramic image acts as a visual poster.
 
-## Two columns
+<div class="result-case">
+  <Video
+    src="./videos/ours-devotion-360.mp4"
+    poster={pinkPanorama.src}
+    aria-label="360-degree result video for Devotion"
+  />
+  <div class="case-details">
+    <span class="media-label">Case 01</span>
+    <h3>Devotion</h3>
+    <dl>
+      <div><dt>Song length</dt><dd>To be added</dd></div>
+      <div><dt>Text prompt</dt><dd>“a beautiful prairie”</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-devotion.png">Open trajectory PNG</a></dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="viewer-link" href="./viewer/?video=ours-devotion-360.mp4">Open 360&deg; view</a>
+      <code>public/videos/ours-devotion-360.mp4</code>
+    </div>
+  </div>
+</div>
 
-Use the two columns component to display two columns of content. In this example, the first column contains a YouTube video embed and the second column contains an interactive 3D model viewer. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+<div class="result-case">
+  <Video
+    src="./videos/ours-case-02-360.mp4"
+    poster={pinkPanorama.src}
+    aria-label="360-degree result video for case 2"
+  />
+  <div class="case-details">
+    <span class="media-label">Case 02</span>
+    <h3>Song title to be added</h3>
+    <dl>
+      <div><dt>Song length</dt><dd>To be added</dd></div>
+      <div><dt>Text prompt</dt><dd>To be added</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-case-02.png">Open trajectory PNG</a></dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="viewer-link" href="./viewer/?video=ours-case-02-360.mp4">Open 360&deg; view</a>
+      <code>public/videos/ours-case-02-360.mp4</code>
+    </div>
+  </div>
+</div>
 
-<TwoColumns>
-  <YouTubeVideo slot="left" videoId="wjZofJX0v4M" />
-  <ModelViewer slot="right" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
-</TwoColumns>
+<div class="result-case">
+  <Video
+    src="./videos/ours-case-03-360.mp4"
+    poster={pinkPanorama.src}
+    aria-label="360-degree result video for case 3"
+  />
+  <div class="case-details">
+    <span class="media-label">Case 03</span>
+    <h3>Song title to be added</h3>
+    <dl>
+      <div><dt>Song length</dt><dd>To be added</dd></div>
+      <div><dt>Text prompt</dt><dd>To be added</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-case-03.png">Open trajectory PNG</a></dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="viewer-link" href="./viewer/?video=ours-case-03-360.mp4">Open 360&deg; view</a>
+      <code>public/videos/ours-case-03-360.mp4</code>
+    </div>
+  </div>
+</div>
 
-## $\LaTeX$
+### Qualitative comparison
 
-You can also add $\LaTeX$ formulas, rendered during the build process using [$\KaTeX$](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: $a^2 + b^2 = c^2$. Or, you can write them as a block:
+The submission draft identifies From-Sound-To-Sight as a representative
+audio-to-visual generation baseline for qualitative comparison. Use synchronized
+clips of the same song and prompt here so viewers can inspect the difference in
+presentation directly; this page does not make an unverified performance claim.
 
-$$
-\int_a^b f(x) dx
-$$
+<div class="comparison-case">
+  <div class="comparison-videos">
+    <div><span class="media-label">Ours</span><Video src="./videos/ours-vs-baseline-case-01.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 1" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src="./videos/baseline-from-sound-to-sight-case-01.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 1" /></div>
+  </div>
+  <div class="comparison-metadata">
+    <p class="comparison-song"><strong>Song:</strong> To be added</p>
+    <div><span>Our prompt</span><p>To be added</p></div>
+    <div><span>Compared-work prompt</span><p>To be added</p></div>
+  </div>
+</div>
+
+<div class="comparison-case">
+  <div class="comparison-videos">
+    <div><span class="media-label">Ours</span><Video src="./videos/ours-vs-baseline-case-02.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 2" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src="./videos/baseline-from-sound-to-sight-case-02.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 2" /></div>
+  </div>
+  <div class="comparison-metadata">
+    <p class="comparison-song"><strong>Song:</strong> To be added</p>
+    <div><span>Our prompt</span><p>To be added</p></div>
+    <div><span>Compared-work prompt</span><p>To be added</p></div>
+  </div>
+</div>
+
+<div class="comparison-case">
+  <div class="comparison-videos">
+    <div><span class="media-label">Ours</span><Video src="./videos/ours-vs-baseline-case-03.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 3" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src="./videos/baseline-from-sound-to-sight-case-03.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 3" /></div>
+  </div>
+  <div class="comparison-metadata">
+    <p class="comparison-song"><strong>Song:</strong> To be added</p>
+    <div><span>Our prompt</span><p>To be added</p></div>
+    <div><span>Compared-work prompt</span><p>To be added</p></div>
+  </div>
+</div>
+
+## Contributions
+
+- **Immersive music visualization.** We extend music-driven visual generation
+  toward a 360° format intended for VR viewing.
+- **Dynamic music emotion modeling.** The pipeline predicts valence–arousal
+  conditions over four-bar units rather than using a single static mood.
+- **Emotion-guided scene synthesis.** Emotional residuals guide panoramic
+  keyframe generation while preserving a user-provided base scene concept.
+- **Structure-aware video assembly.** Dynamic scenes and transition clips are
+  arranged according to the song's musical order.
+
+## Limitations and future work
+
+Although this work addresses emotion-aware, structure-guided 360° music
+visualization, the current draft identifies several limitations:
+
+- Similar valence–arousal conditions can lead to repetitive keyframes.
+- Panoramic boundary inconsistencies can create visible seams.
+- Output resolution is still limited.
+- Forward-moving visual effects are not fully controllable and may affect motion
+  comfort.
+- Long prompts can cause a drift from omnidirectional imagery toward
+  rectilinear scenes.
+
+These constraints motivate future work on stronger 360° consistency, higher
+resolution generation, and more controllable immersive motion.
+
+## Materials
+
+- [Submission draft (PDF)](./documents/bring-music-the-horizon.pdf)
+- [Project poster (PDF)](./documents/bring-music-the-horizon-poster.pdf)
+
+## Acknowledgements
+
+This research is supported by the Yushan Young Fellow Program of the Ministry
+of Education in Taiwan under Grant MOE-114-YSFEE-0010-008-P1, and by the
+National Science and Technology Council, Taiwan, under Grant
+NSTC 115-2813-C-A49-161-E.
 
 ## Citation
 
-If you copy your bibliography into `./bibliography.bib`, you can cite papers using their BibTeX keys, and they'll be automatically formatted and included in the bibliography section at the end. For example: [@vaswani2017attention]. Note that these citations are distinct from footnotes[^mynote], which show up in a separate section if you use them.
-
-[^mynote]: On the web, they should really be called "endnotes", since each page constitutes a full document.
-
-## Table
-
-Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
-
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
-
-## BibTeX citation
-
-Displaying the BibTeX entry for your paper in a code block makes it easy to copy and paste.
-
-```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
-}
-```
-
-## Bibliography
-
-[^ref]
+Citation metadata will be added once the submission's final author list and
+publication details are available.

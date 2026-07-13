@@ -51,18 +51,26 @@ const hasBackground = Astro.slots.has("background");
     class:list={[
       "relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
       hasBackground
-        ? "gap-10 text-white prose-headings:text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
+        ? "prose-headings:text-white gap-10 text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
         : "gap-6",
     ]}
   >
-    <h1 class="my-0 text-5xl font-medium">{title}</h1>
-    <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
+    <h1 class="my-0 text-5xl font-medium" set:html={title} />
+    <div class="flex flex-row flex-nowrap justify-center gap-x-8 gap-y-4">
       {
         authors.map((author) => (
           <div class="flex flex-col items-center text-center">
-            <div class="flex flex-row text-xl">
+            <div class="flex flex-row text-2xl font-semibold">
               {author.url ? (
-                <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
+                <a
+                  class:list={[
+                    hasBackground &&
+                      "not-prose text-blue-200 underline decoration-dashed underline-offset-4 hover:text-blue-100 hover:decoration-solid",
+                  ]}
+                  href={author.url}
+                >
+                  {author.name}
+                </a>
               ) : (
                 author.name
               )}
@@ -80,10 +88,10 @@ const hasBackground = Astro.slots.has("background");
         ))
       }
     </div>
-    {conference && <div>{conference}</div>}
+    {conference && <div class="text-lg font-medium">{conference}</div>}
     {
       notes && (
-        <div class="text-center text-sm">
+        <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 rounded-xl bg-black/25 px-5 py-3 text-center text-base font-medium">
           {
             // prettier-ignore
             notes.map((note, index, array) => (
@@ -101,8 +109,11 @@ const hasBackground = Astro.slots.has("background");
           {links.map((link) => (
             <a
               href={link.url}
-              class:list={["flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline",
-                hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800 text-shadow-none shadow-[0_0_8px_rgba(0,0,0,0.6)]" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"
+              class:list={[
+                "flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline",
+                hasBackground
+                  ? "bg-white text-zinc-800 shadow-[0_0_8px_rgba(0,0,0,0.6)] text-shadow-none hover:bg-zinc-200"
+                  : "bg-zinc-800 text-white hover:bg-black dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-50",
               ]}
             >
               {link.icon && <Icon name={link.icon} />}

@@ -1,0 +1,216 @@
+---
+import "../styles/global.css";
+
+const baseUrl = import.meta.env.BASE_URL;
+const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+---
+
+<!doctype html>
+<html lang="en" data-theme="device">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>360&deg; Video Viewer | Bring Music The Horizon</title>
+    <script is:inline src="https://aframe.io/releases/1.8.0/aframe.min.js"
+    ></script>
+  </head>
+  <body class="viewer-page">
+    <main class="viewer-shell">
+      <header class="viewer-header">
+        <a href={basePath}>&larr; Back to project page</a>
+        <div>
+          <p class="viewer-kicker">Bring Music The Horizon</p>
+          <h1>Interactive 360&deg; viewer</h1>
+        </div>
+        <p id="viewer-status" aria-live="polite">
+          Choose a result from the project page.
+        </p>
+      </header>
+
+      <div class="viewer-stage">
+        <a-scene
+          embedded
+          vr-mode-ui="enabled: true"
+          device-orientation-permission-ui="enabled: true"
+          renderer="colorManagement: true; antialias: true"
+        >
+          <a-assets>
+            <video
+              id="panorama-video"
+              crossorigin="anonymous"
+              loop
+              playsinline
+              preload="metadata"></video>
+          </a-assets>
+          <a-videosphere src="#panorama-video" rotation="0 -90 0"
+          ></a-videosphere>
+          <a-entity camera look-controls position="0 1.6 0"></a-entity>
+        </a-scene>
+
+        <div id="viewer-overlay" class="viewer-overlay">
+          <button id="play-button" type="button" disabled
+            >Loading viewer…</button
+          >
+          <p>
+            Drag to look around. Use fullscreen for the most immersive view.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script define:vars={{ basePath }}>
+      const video = document.querySelector("#panorama-video");
+      const status = document.querySelector("#viewer-status");
+      const playButton = document.querySelector("#play-button");
+      const overlay = document.querySelector("#viewer-overlay");
+      const filename = new URLSearchParams(window.location.search).get("video");
+      const safeFilename = /^[a-zA-Z0-9][a-zA-Z0-9._-]*\.(mp4|webm)$/i;
+
+      if (!filename || !safeFilename.test(filename)) {
+        status.textContent = "No supported result video was selected.";
+        playButton.textContent = "Select a result on the project page";
+      } else {
+        const videoUrl = new URL(
+          `videos/${filename}`,
+          window.location.origin + basePath,
+        );
+        video.src = videoUrl.href;
+        status.textContent = filename;
+        playButton.disabled = false;
+        playButton.textContent = "Start 360° video";
+      }
+
+      playButton.addEventListener("click", async () => {
+        if (!video.src) return;
+
+        try {
+          await video.play();
+          overlay.classList.add("is-playing");
+        } catch {
+          status.textContent =
+            "The video could not be played. Check that the MP4 or WebM file exists.";
+        }
+      });
+
+      video.addEventListener("error", () => {
+        status.textContent = "The selected video file could not be loaded.";
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .viewer-page {
+    min-height: 100svh;
+    background: #09090b;
+    color: #fafafa;
+  }
+
+  .viewer-shell {
+    width: min(100%, 90rem);
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .viewer-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .viewer-header > a {
+    color: #fde68a;
+    text-decoration: none;
+  }
+
+  .viewer-header > div {
+    text-align: center;
+  }
+
+  .viewer-kicker {
+    margin: 0;
+    color: #fbbf24;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .viewer-header h1 {
+    margin: 0.25rem 0 0;
+    font-size: 1.45rem;
+  }
+
+  #viewer-status {
+    margin: 0;
+    color: #d4d4d8;
+    font-size: 0.85rem;
+    text-align: right;
+  }
+
+  .viewer-stage {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #3f3f46;
+    border-radius: 1rem;
+    background: #18181b;
+  }
+
+  a-scene {
+    width: 100%;
+    height: 100%;
+  }
+
+  .viewer-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: linear-gradient(rgb(9 9 11 / 0.5), rgb(9 9 11 / 0.75));
+    text-align: center;
+    transition: opacity 180ms ease;
+  }
+
+  .viewer-overlay.is-playing {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .viewer-overlay button {
+    padding: 0.75rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    background: #fbbf24;
+    color: #18181b;
+    font: inherit;
+    font-weight: 750;
+  }
+
+  .viewer-overlay button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .viewer-overlay p {
+    margin: 0;
+    color: #e4e4e7;
+  }
+
+  @media (max-width: 44rem) {
+    .viewer-header {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .viewer-header > a,
+    #viewer-status {
+      text-align: center;
+    }
+  }
+</style>
