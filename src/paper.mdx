@@ -15,6 +15,16 @@ import Video from "./components/Video.astro";
 import pipelineOverview from "./assets/pipeline-overview.png";
 import pinkPanorama from "./assets/pink_009.png";
 
+import result1 from "./assets/our-result-01.mp4"
+import result2 from "./assets/our-result-02.mp4"
+import result3 from "./assets/our-result-03.mp4"
+import ourcompare1 from "./assets/ours-vs-baseline-case-01.mp4"
+import ourcompare2 from "./assets/ours-vs-baseline-case-02.mp4"
+import ourcompare3 from "./assets/ours-vs-baseline-case-03.mp4"
+import fsts01 from "./assets/baseline-from-sound-to-sight-case-01.mp4"
+import fsts02 from "./assets/baseline-from-sound-to-sight-case-02.mp4"
+import fsts03 from "./assets/baseline-from-sound-to-sight-case-03.mp4"
+
 <Header
   title="Bring Music The Horizon: Music-Driven 360&deg; Video Generation"
   conference="Under submission to the 3rd Workshop on AVGenL, ECCV 2026"
@@ -152,7 +162,7 @@ result files are added, the supplied panoramic image acts as a visual poster.
 
 <div class="result-case">
   <Video
-    src="BMTH_Project_Page/videos/ours-devotion-360.mp4"
+    src={result1}
     poster={pinkPanorama.src}
     aria-label="360-degree result video for Devotion"
   />
@@ -173,7 +183,7 @@ result files are added, the supplied panoramic image acts as a visual poster.
 
 <div class="result-case">
   <Video
-    src="BMTH_Project_Page/videos/ours-case-02-360.mp4"
+    src={result2}
     poster={pinkPanorama.src}
     aria-label="360-degree result video for case 2"
   />
@@ -194,7 +204,7 @@ result files are added, the supplied panoramic image acts as a visual poster.
 
 <div class="result-case">
   <Video
-    src="BMTH_Project_Page/videos/ours-case-03-360.mp4"
+    src={result3}
     poster={pinkPanorama.src}
     aria-label="360-degree result video for case 3"
   />
@@ -222,8 +232,8 @@ presentation directly; this page does not make an unverified performance claim.
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src="BMTH_Project_Page/videos/ours-vs-baseline-case-01.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 1" /></div>
-    <div><span class="media-label">From-Sound-To-Sight</span><Video src="BMTH_Project_Page/videos/baseline-from-sound-to-sight-case-01.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 1" /></div>
+    <div><span class="media-label">Ours</span><Video src={ourcompare1} poster={pinkPanorama.src} aria-label="Our result for comparison case 1" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts01} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 1" /></div>
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Frank Sinatra - Strangers In The Night</p>
@@ -234,8 +244,8 @@ presentation directly; this page does not make an unverified performance claim.
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src="BMTH_Project_Page/videos/ours-vs-baseline-case-02.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 2" /></div>
-    <div><span class="media-label">From-Sound-To-Sight</span><Video src="BMTH_Project_Page/videos/baseline-from-sound-to-sight-case-02.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 2" /></div>
+    <div><span class="media-label">Ours</span><Video src={ourcompare2} poster={pinkPanorama.src} aria-label="Our result for comparison case 2" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts02} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 2" /></div>
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Nirvana - Smells Like Teen Spirit</p>
@@ -246,8 +256,8 @@ presentation directly; this page does not make an unverified performance claim.
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src="BMTH_Project_Page/videos/ours-vs-baseline-case-03.mp4" poster={pinkPanorama.src} aria-label="Our result for comparison case 3" /></div>
-    <div><span class="media-label">From-Sound-To-Sight</span><Video src="BMTH_Project_Page/videos/baseline-from-sound-to-sight-case-03.mp4" poster={pinkPanorama.src} aria-label="Baseline result for comparison case 3" /></div>
+    <div><span class="media-label">Ours</span><Video src={ourcompare3} poster={pinkPanorama.src} aria-label="Our result for comparison case 3" /></div>
+    <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts03} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 3" /></div>
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Dua Lipa - Don't Start Now</p>
