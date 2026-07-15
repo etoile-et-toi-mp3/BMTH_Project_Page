@@ -45,7 +45,10 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
           </a-assets>
           <a-videosphere src="#panorama-video" rotation="0 -90 0"
           ></a-videosphere>
-          <a-entity camera look-controls position="0 1.6 0"></a-entity>
+          <a-entity
+            camera
+            look-controls="reverseMouseDrag: true; reverseTouchDrag: true"
+            position="0 1.6 0"></a-entity>
         </a-scene>
 
         <div id="viewer-overlay" class="viewer-overlay">
@@ -64,19 +67,27 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
       const status = document.querySelector("#viewer-status");
       const playButton = document.querySelector("#play-button");
       const overlay = document.querySelector("#viewer-overlay");
-      const filename = new URLSearchParams(window.location.search).get("video");
-      const safeFilename = /^[a-zA-Z0-9][a-zA-Z0-9._-]*\.(mp4|webm)$/i;
+      const videoParam = new URLSearchParams(window.location.search).get("video");
+      const siteUrl = new URL(window.location.origin + basePath);
+      let videoUrl;
 
-      if (!filename || !safeFilename.test(filename)) {
-        status.textContent = "No supported result video was selected.";
+      try {
+        if (!videoParam) throw new Error("Missing video");
+
+        videoUrl = new URL(videoParam, siteUrl);
+        const isLocalVideo =
+          videoUrl.origin === window.location.origin &&
+          videoUrl.pathname.endsWith(".mp4");
+
+        if (!isLocalVideo) throw new Error("Unsupported video");
+      } catch {
+        status.textContent = "No supported local result video was selected.";
         playButton.textContent = "Select a result on the project page";
-      } else {
-        const videoUrl = new URL(
-          `videos/${filename}`,
-          window.location.origin + basePath,
-        );
+      }
+
+      if (videoUrl) {
         video.src = videoUrl.href;
-        status.textContent = filename;
+        status.textContent = "Selected result ready to play.";
         playButton.disabled = false;
         playButton.textContent = "Start 360° video";
       }

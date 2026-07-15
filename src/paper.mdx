@@ -25,6 +25,9 @@ import fsts01 from "./assets/baseline-from-sound-to-sight-case-01.mp4"
 import fsts02 from "./assets/baseline-from-sound-to-sight-case-02.mp4"
 import fsts03 from "./assets/baseline-from-sound-to-sight-case-03.mp4"
 
+export const viewerUrl = (video) =>
+  `${import.meta.env.BASE_URL}viewer/?video=${encodeURIComponent(video)}`;
+
 <Header
   title="Bring Music The Horizon: Music-Driven 360&deg; Video Generation"
   conference="Under submission to the 3rd Workshop on AVGenL, ECCV 2026"
@@ -82,7 +85,7 @@ import fsts03 from "./assets/baseline-from-sound-to-sight-case-03.mp4"
 
 Music visualization can deepen listeners' understanding and experience by
 translating audio into visual form. Yet many existing approaches rely heavily on
-lyrics or produce flat, rectilinear videos, limiting both their applicability to
+lyrics or produce flat, non-immersive videos, limiting both their applicability to
 instrumental music and their ability to create an immersive listening experience.
 
 We propose **Bring Music The Horizon**, an emotion-aware pipeline for
@@ -99,15 +102,14 @@ designed to reflect the song's emotional progression and temporal structure.
 
 Most music visualization is still framed as a conventional screen-based music
 video. We investigate a complementary experience: a listener can look around
-inside a scene while its visual atmosphere changes with the song. The goal is not
-to illustrate lyrics, but to use musical structure and continuous affect as
+inside a scene while its visual atmosphere changes with the song. The goal of 
+this work is to use musical structure and continuous affect as
 conditions for an evolving, immersive scene.
 
 <div class="note-panel">
   <strong>Scope.</strong> This work focuses on qualitative, immersive music
   visualization. The accompanying draft reports demonstrations across different
-  genres and qualitative comparison with From-Sound-To-Sight; it does not report
-  quantitative benchmark scores.
+  genres and qualitative comparison with From-Sound-To-Sight.
 </div>
 
 ## Method
@@ -147,7 +149,7 @@ and produce cleaner, scene-focused outputs.
 
 Each keyframe anchors a four-bar video unit. Wan-I2V generates a dynamic scene
 for the first three bars, while Wan-flf2v generates a transition clip during the
-final bar to connect to the next keyframe. Concatenating these clips in musical
+final bar to connect to the next keyframe. Concatenating these clips in temporal
 order yields the final 360° visualization.
 
 ## Results and demos
@@ -157,26 +159,22 @@ VR headset. The visual atmosphere and transitions are designed to follow the
 estimated emotion conditions at different musical segments, while the four-bar
 units align scene generation with the song's temporal structure.
 
-Each video window below is wired to a future file in `public/videos/`. Until the
-result files are added, the supplied panoramic image acts as a visual poster.
-
 <div class="result-case">
   <Video
     src={result1}
     poster={pinkPanorama.src}
-    aria-label="360-degree result video for Devotion"
+    aria-label="360-degree result video for case 1"
   />
   <div class="case-details">
     <span class="media-label">Case 01</span>
-    <h3>Song title to be added</h3>
+    <h3>Queen - Bohemian Rhapsody</h3>
     <dl>
-      <div><dt>Song length</dt><dd>To be added</dd></div>
-      <div><dt>Text prompt</dt><dd>to be added</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-devotion.png">Open trajectory PNG</a></dd></div>
+      <div><dt>Song length</dt><dd>6:00 (2:15 in demo video)</dd></div>
+      <div><dt>Text prompt</dt><dd>"An ancient medieval European street"</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-01.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
-      <a class="viewer-link" href="./viewer/?video=ours-devotion-360.mp4">Open 360&deg; view</a>
-      <code>public/videos/ours-devotion-360.mp4</code>
+      <a class="viewer-link" href={viewerUrl(result1)}>Open 360&deg; view</a>
     </div>
   </div>
 </div>
@@ -189,15 +187,14 @@ result files are added, the supplied panoramic image acts as a visual poster.
   />
   <div class="case-details">
     <span class="media-label">Case 02</span>
-    <h3>Song title to be added</h3>
+    <h3>Michael Jackson - Stranger In Moscow</h3>
     <dl>
-      <div><dt>Song length</dt><dd>To be added</dd></div>
-      <div><dt>Text prompt</dt><dd>To be added</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-case-02.png">Open trajectory PNG</a></dd></div>
+      <div><dt>Song length</dt><dd>5:35 (1:36 in demo video)</dd></div>
+      <div><dt>Text prompt</dt><dd>"A gloomy afternoon on a rain-soaked street."</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-02.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
-      <a class="viewer-link" href="./viewer/?video=ours-case-02-360.mp4">Open 360&deg; view</a>
-      <code>public/videos/ours-case-02-360.mp4</code>
+      <a class="viewer-link" href={viewerUrl(result2)}>Open 360&deg; view</a>
     </div>
   </div>
 </div>
@@ -210,53 +207,58 @@ result files are added, the supplied panoramic image acts as a visual poster.
   />
   <div class="case-details">
     <span class="media-label">Case 03</span>
-    <h3>Song title to be added</h3>
+    <h3>Jay Chou - Rice Field</h3>
     <dl>
-      <div><dt>Song length</dt><dd>To be added</dd></div>
-      <div><dt>Text prompt</dt><dd>To be added</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/va-case-03.png">Open trajectory PNG</a></dd></div>
+      <div><dt>Song length</dt><dd>3:44 (1:22 in demo video)</dd></div>
+      <div><dt>Text prompt</dt><dd>"Vast wheat fields"</dd></div>
+      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-03.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
-      <a class="viewer-link" href="./viewer/?video=ours-case-03-360.mp4">Open 360&deg; view</a>
-      <code>public/videos/ours-case-03-360.mp4</code>
+      <a class="viewer-link" href={viewerUrl(result3)}>Open 360&deg; view</a>
     </div>
   </div>
 </div>
 
 ### Qualitative comparison
 
-The submission draft identifies From-Sound-To-Sight as a representative
-audio-to-visual generation baseline for qualitative comparison. Use synchronized
-clips of the same song and prompt here so viewers can inspect the difference in
-presentation directly; this page does not make an unverified performance claim.
+We compare our results with From-Sound-To-Sight, with 3 cases:
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src={ourcompare1} poster={pinkPanorama.src} aria-label="Our result for comparison case 1" /></div>
+    <div>
+      <span class="media-label">Ours</span><Video src={ourcompare1} poster={pinkPanorama.src} aria-label="Our result for comparison case 1" />
+      <a class="viewer-link" href={viewerUrl(ourcompare1)}>Open 360&deg; view</a>
+    </div>
     <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts01} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 1" /></div>
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Frank Sinatra - Strangers In The Night</p>
-    <div><span>Our prompt</span><p>To be added</p></div>
+    <div><span>Our prompt</span><p>"a night city street view"</p></div>
     <div><span>Compared-work prompt</span><p><i>*Unknown</i></p></div>
   </div>
 </div>
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src={ourcompare2} poster={pinkPanorama.src} aria-label="Our result for comparison case 2" /></div>
+    <div>
+      <span class="media-label">Ours</span><Video src={ourcompare2} poster={pinkPanorama.src} aria-label="Our result for comparison case 2" />
+      <a class="viewer-link" href={viewerUrl(ourcompare2)}>Open 360&deg; view</a>
+    </div>
     <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts02} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 2" /></div>
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Nirvana - Smells Like Teen Spirit</p>
-    <div><span>Our prompt</span><p>To be added</p></div>
+    <div><span>Our prompt</span><p>"a harsh rock land, with obscure volcano and lava far away."</p></div>
     <div><span>Compared-work prompt</span><p>The music video for this song depicts a journey through a dark and stormy landscape. The protagonist is a lone traveler who is navigating through treacherous terrain. As the song builds in intensity, so does the weather around them, mirroring the rising tension in the track. The visuals capture the essence of perseverance and the raw power of nature. The climax of the video shows the traveler reaching a peak, symbolizing overcoming adversity and finding clarity amidst the chaos. The minimalist approach allows the lyrics and melody to shine, evoking a sense of introspection and empowerment in the viewer.</p></div>
   </div>
 </div>
 
 <div class="comparison-case">
   <div class="comparison-videos">
-    <div><span class="media-label">Ours</span><Video src={ourcompare3} poster={pinkPanorama.src} aria-label="Our result for comparison case 3" /></div>
+    <div>
+      <span class="media-label">Ours</span><Video src={ourcompare3} poster={pinkPanorama.src} aria-label="Our result for comparison case 3" />
+      <a class="viewer-link" href={viewerUrl(ourcompare3)}>Open 360&deg; view</a>
+    </div>
     <div><span class="media-label">From-Sound-To-Sight</span><Video src={fsts03} poster={pinkPanorama.src} aria-label="Baseline result for comparison case 3" /></div>
   </div>
   <div class="comparison-metadata">
@@ -275,7 +277,7 @@ presentation directly; this page does not make an unverified performance claim.
 - **Emotion-guided scene synthesis.** Emotional residuals guide panoramic
   keyframe generation while preserving a user-provided base scene concept.
 - **Structure-aware video assembly.** Dynamic scenes and transition clips are
-  arranged according to the song's musical order.
+  arranged according to the song's temporal order.
 
 ## Limitations and future work
 
@@ -288,7 +290,7 @@ visualization, the current draft identifies several limitations:
 - Forward-moving visual effects are not fully controllable and may affect motion
   comfort.
 - Long prompts can cause a drift from omnidirectional imagery toward
-  rectilinear scenes.
+  flat scenes.
 
 These constraints motivate future work on stronger 360° consistency, higher
 resolution generation, and more controllable immersive motion.
