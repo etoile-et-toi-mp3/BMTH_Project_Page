@@ -112,7 +112,7 @@ conditions for an evolving, immersive scene.
 
 <div class="note-panel">
   <strong>Scope.</strong> This work focuses on qualitative, immersive music
-  visualization. The accompanying draft reports demonstrations across different
+  visualization. Our paper presents demonstrations with songs across different
   genres and qualitative comparison with From-Sound-To-Sight.
 </div>
 
@@ -147,7 +147,7 @@ retrained EmotiCrafter model to obtain an emotional residual. We use that
 residual with SEGA as guidance in the diffusion process, then use SDXL 360° LoRA
 to synthesize an emotion-aligned panoramic keyframe. Retraining EmotiCrafter
 with a custom dataset is intended to reduce unwanted human-activity artifacts
-and produce cleaner, scene-focused outputs.
+and produce cleaner, scene-focused outputs (this is a limitation of the original paper).
 
 ### 3. Temporally connected 360° video
 
@@ -170,12 +170,14 @@ units align scene generation with the song's temporal structure.
     aria-label="360-degree result video for case 1"
   />
   <div class="case-details">
-    <span class="media-label">Case 01</span>
-    <h3>Queen - Bohemian Rhapsody</h3>
-    <dl>
-      <div><dt>Song length</dt><dd>6:00 (2:15 in demo video)</dd></div>
-      <div><dt>Text prompt</dt><dd>"An ancient medieval European street"</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-01.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
+    <div class="case-summary">
+      <span class="media-label">Case 01</span>
+      <h3>Queen - Bohemian Rhapsody</h3>
+    </div>
+    <dl class="song-properties">
+      <div class="song-property"><dt>Song length</dt><dd>6:00 (2:15 in demo video)</dd></div>
+      <div class="song-property"><dt>Text prompt</dt><dd>"An ancient medieval European street"</dd></div>
+      <div class="song-property"><dt>V-A trajectory</dt><dd><a href="./figures/our-va-01.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
       <a class="viewer-link" href={viewerUrl(result1)}>Open 360&deg; view</a>
@@ -190,12 +192,14 @@ units align scene generation with the song's temporal structure.
     aria-label="360-degree result video for case 2"
   />
   <div class="case-details">
-    <span class="media-label">Case 02</span>
-    <h3>Michael Jackson - Stranger In Moscow</h3>
-    <dl>
-      <div><dt>Song length</dt><dd>5:35 (1:36 in demo video)</dd></div>
-      <div><dt>Text prompt</dt><dd>"A gloomy afternoon on a rain-soaked street."</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-02.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
+    <div class="case-summary">
+      <span class="media-label">Case 02</span>
+      <h3>Michael Jackson - Stranger In Moscow</h3>
+    </div>
+    <dl class="song-properties">
+      <div class="song-property"><dt>Song length</dt><dd>5:35 (1:36 in demo video)</dd></div>
+      <div class="song-property"><dt>Text prompt</dt><dd>"A gloomy afternoon on a rain-soaked street."</dd></div>
+      <div class="song-property"><dt>V-A trajectory</dt><dd><a href="./figures/our-va-02.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
       <a class="viewer-link" href={viewerUrl(result2)}>Open 360&deg; view</a>
@@ -210,12 +214,14 @@ units align scene generation with the song's temporal structure.
     aria-label="360-degree result video for case 3"
   />
   <div class="case-details">
-    <span class="media-label">Case 03</span>
-    <h3>Jay Chou - Rice Field</h3>
-    <dl>
-      <div><dt>Song length</dt><dd>3:44 (1:22 in demo video)</dd></div>
-      <div><dt>Text prompt</dt><dd>"Vast wheat fields"</dd></div>
-      <div><dt>V-A trajectory</dt><dd><a href="./figures/our-va-03.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
+    <div class="case-summary">
+      <span class="media-label">Case 03</span>
+      <h3>Jay Chou - Rice Field</h3>
+    </div>
+    <dl class="song-properties">
+      <div class="song-property"><dt>Song length</dt><dd>3:44 (1:22 in demo video)</dd></div>
+      <div class="song-property"><dt>Text prompt</dt><dd>"Vast wheat fields"</dd></div>
+      <div class="song-property"><dt>V-A trajectory</dt><dd><a href="./figures/our-va-03.png" target="_blank" rel="noopener noreferrer">Open trajectory PNG</a></dd></div>
     </dl>
     <div class="case-actions">
       <a class="viewer-link" href={viewerUrl(result3)}>Open 360&deg; view</a>
@@ -238,7 +244,7 @@ We compare our results with From-Sound-To-Sight, with 3 cases:
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Frank Sinatra - Strangers In The Night</p>
     <div><span>Our prompt</span><p>"a night city street view"</p></div>
-    <div><span>Compared-work prompt</span><p><i>*Unknown</i></p></div>
+    <div><span>Compared-work prompt</span><p>Not available.</p></div>
   </div>
 </div>
 
@@ -267,8 +273,8 @@ We compare our results with From-Sound-To-Sight, with 3 cases:
   </div>
   <div class="comparison-metadata">
     <p class="comparison-song"><strong>Song:</strong> Dua Lipa - Don't Start Now</p>
-    <div><span>Our prompt</span><p>To be added</p></div>
-    <div><span>Compared-work prompt</span><p><i>*Unknown</i></p></div>
+    <div><span>Our prompt</span><p>Not available.</p></div>
+    <div><span>Compared-work prompt</span><p>Not available.</p></div>
   </div>
 </div>
 
@@ -277,7 +283,7 @@ We compare our results with From-Sound-To-Sight, with 3 cases:
 - **Immersive music visualization.** We extend music-driven visual generation
   toward a 360° format intended for VR viewing.
 - **Dynamic music emotion modeling.** The pipeline predicts valence–arousal
-  conditions over four-bar units rather than using a single static mood.
+  conditions over four-bar units rather than using a single static mood to represent the whole song.
 - **Emotion-guided scene synthesis.** Emotional residuals guide panoramic
   keyframe generation while preserving a user-provided base scene concept.
 - **Structure-aware video assembly.** Dynamic scenes and transition clips are
@@ -286,14 +292,14 @@ We compare our results with From-Sound-To-Sight, with 3 cases:
 ## Limitations and future work
 
 Although this work addresses emotion-aware, structure-guided 360° music
-visualization, the current draft identifies several limitations:
+visualization, the present system has several limitations:
 
 - Similar valence–arousal conditions can lead to repetitive keyframes.
 - Panoramic boundary inconsistencies can create visible seams.
 - Output resolution is still limited.
 - Forward-moving visual effects are not fully controllable and may affect motion
   comfort.
-- Long prompts can cause a drift from omnidirectional imagery toward
+- Long prompts can cause a drift from generating omnidirectional imagery toward
   flat scenes.
 
 These constraints motivate future work on stronger 360° consistency, higher
@@ -301,7 +307,7 @@ resolution generation, and more controllable immersive motion.
 
 ## Materials
 
-- [Submission draft (PDF)](./documents/bring-music-the-horizon.pdf)
+- [Paper (PDF)](./documents/bring-music-the-horizon.pdf)
 - [Project poster (PDF)](./documents/bring-music-the-horizon-poster.pdf)
 
 ## Acknowledgements
@@ -310,8 +316,3 @@ This research is supported by the Yushan Young Fellow Program of the Ministry
 of Education in Taiwan under Grant MOE-114-YSFEE-0010-008-P1, and by the
 National Science and Technology Council, Taiwan, under Grant
 NSTC 115-2813-C-A49-161-E.
-
-## Citation
-
-Citation metadata will be added once the submission's final author list and
-publication details are available.

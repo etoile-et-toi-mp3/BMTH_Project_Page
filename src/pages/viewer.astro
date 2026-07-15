@@ -60,6 +60,20 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
           </p>
         </div>
       </div>
+
+      <div class="viewer-controls" aria-label="Video playback controls">
+        <label for="progress-bar">Video progress</label>
+        <input
+          id="progress-bar"
+          type="range"
+          min="0"
+          max="0"
+          step="0.1"
+          value="0"
+          disabled
+        />
+        <output id="progress-time" for="progress-bar">0:00 / 0:00</output>
+      </div>
     </main>
 
     <script define:vars={{ basePath }}>
@@ -67,7 +81,11 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
       const status = document.querySelector("#viewer-status");
       const playButton = document.querySelector("#play-button");
       const overlay = document.querySelector("#viewer-overlay");
-      const videoParam = new URLSearchParams(window.location.search).get("video");
+      const progressBar = document.querySelector("#progress-bar");
+      const progressTime = document.querySelector("#progress-time");
+      const videoParam = new URLSearchParams(window.location.search).get(
+        "video",
+      );
       const siteUrl = new URL(window.location.origin + basePath);
       let videoUrl;
 
@@ -91,6 +109,37 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
         playButton.disabled = false;
         playButton.textContent = "Start 360° video";
       }
+
+      const formatTime = (seconds) => {
+        if (!Number.isFinite(seconds)) return "0:00";
+
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60)
+          .toString()
+          .padStart(2, "0");
+
+        return `${minutes}:${remainingSeconds}`;
+      };
+
+      const updateProgress = () => {
+        if (!Number.isFinite(video.duration)) return;
+
+        progressBar.max = video.duration;
+        progressBar.value = video.currentTime;
+        progressTime.value = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      };
+
+      video.addEventListener("loadedmetadata", () => {
+        progressBar.disabled = false;
+        updateProgress();
+      });
+
+      video.addEventListener("timeupdate", updateProgress);
+
+      progressBar.addEventListener("input", () => {
+        video.currentTime = Number(progressBar.value);
+        updateProgress();
+      });
 
       playButton.addEventListener("click", async () => {
         if (!video.src) return;
@@ -171,6 +220,33 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     background: #18181b;
   }
 
+  .viewer-controls {
+    display: grid;
+    grid-template-columns: auto minmax(8rem, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.9rem;
+    color: #d4d4d8;
+    font-size: 0.85rem;
+  }
+
+  .viewer-controls input {
+    width: 100%;
+    accent-color: #fbbf24;
+  }
+
+  .viewer-controls input:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .viewer-controls output {
+    min-width: 6.6rem;
+    color: #a1a1aa;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
   a-scene {
     width: 100%;
     height: 100%;
@@ -222,6 +298,14 @@ const basePath = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     .viewer-header > a,
     #viewer-status {
       text-align: center;
+    }
+
+    .viewer-controls {
+      grid-template-columns: 1fr auto;
+    }
+
+    .viewer-controls label {
+      grid-column: 1 / -1;
     }
   }
 </style>

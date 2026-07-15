@@ -125,41 +125,51 @@ main {
   display: grid;
   grid-template-columns: minmax(10rem, 0.7fr) minmax(0, 1.6fr) auto;
   gap: 0.25rem 1.5rem;
-  align-items: center;
+  align-items: start;
   margin-top: 1rem;
   padding: 1.25rem 1.5rem;
   border-radius: 0.9rem;
   background: var(--color-zinc-100);
 }
 
-.case-details .media-label {
+.case-summary {
   grid-column: 1;
+  align-self: start;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.case-summary .media-label {
   margin: 0;
 }
 
-.case-details h3 {
+.case-summary h3 {
   margin: 0;
   color: var(--color-zinc-900);
   font-size: 1.35rem;
-  grid-column: 1;
 }
 
-.case-details dl {
+.case-details .song-properties {
   grid-column: 2;
-  grid-row: 1 / span 2;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   width: 100%;
   margin: 0;
 }
 
-.case-details dl > div {
+.case-details .song-property {
   display: grid;
   grid-template-columns: 8rem minmax(0, 1fr);
   gap: 0.75rem;
+  align-items: start;
   padding: 0.45rem 0;
   border-bottom: 1px solid var(--color-zinc-200);
 }
 
 .case-details dt {
+  margin: 0;
   color: var(--color-zinc-500);
   font-weight: 650;
 }
@@ -170,7 +180,7 @@ main {
 
 .case-actions {
   grid-column: 3;
-  grid-row: 1 / span 2;
+  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -328,11 +338,11 @@ main {
 
 [data-theme="dark"] .result-case,
 [data-theme="dark"] .comparison-case,
-[data-theme="dark"] .case-details dl > div {
+[data-theme="dark"] .case-details .song-property {
   border-color: var(--color-zinc-700);
 }
 
-[data-theme="dark"] .case-details h3 {
+[data-theme="dark"] .case-summary h3 {
   color: var(--color-zinc-50);
 }
 
@@ -374,11 +384,11 @@ main {
 
   [data-theme="device"] .result-case,
   [data-theme="device"] .comparison-case,
-  [data-theme="device"] .case-details dl > div {
+  [data-theme="device"] .case-details .song-property {
     border-color: var(--color-zinc-700);
   }
 
-  [data-theme="device"] .case-details h3 {
+  [data-theme="device"] .case-summary h3 {
     color: var(--color-zinc-50);
   }
 
@@ -409,15 +419,14 @@ main {
     gap: 0.75rem;
   }
 
-  .case-details .media-label,
-  .case-details h3,
-  .case-details dl,
+  .case-summary,
+  .case-details .song-properties,
   .case-actions {
     grid-column: 1;
     grid-row: auto;
   }
 
-  .case-details dl > div {
+  .case-details .song-property {
     grid-template-columns: 1fr;
     gap: 0.1rem;
   }
