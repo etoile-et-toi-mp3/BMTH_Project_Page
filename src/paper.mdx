@@ -25,8 +25,12 @@ import fsts01 from "./assets/baseline-from-sound-to-sight-case-01.mp4"
 import fsts02 from "./assets/baseline-from-sound-to-sight-case-02.mp4"
 import fsts03 from "./assets/baseline-from-sound-to-sight-case-03.mp4"
 
-export const viewerUrl = (video) =>
-  `${import.meta.env.BASE_URL}viewer/?video=${encodeURIComponent(video)}`;
+export const viewerUrl = (video) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  const basePath = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+
+  return `${basePath}viewer/?video=${encodeURIComponent(video)}`;
+};
 
 <Header
   title="Bring Music The Horizon: Music-Driven 360&deg; Video Generation"
