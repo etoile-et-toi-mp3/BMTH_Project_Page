@@ -60,7 +60,7 @@ export const viewerUrl = (video) => {
 <div class="project-kicker">Music-driven immersive visualization</div>
 
 <p class="lead-copy">
-  From a song and a scene prompt, we generate a 360° visual experience whose
+  Given a song and a scene prompt, we generate a 360° visual experience whose
   atmosphere evolves with the music's <strong>structure</strong> and estimated
   <strong>emotional trajectory</strong>.
 </p>
@@ -68,7 +68,7 @@ export const viewerUrl = (video) => {
 <div class="feature-grid not-prose">
   <div class="feature-card">
     <span class="feature-index">01</span>
-    <h3>Listen to structure</h3>
+    <h3>Extract Structure</h3>
     <p>Extract downbeats and organize the song into four-bar musical units.</p>
   </div>
   <div class="feature-card">
@@ -87,8 +87,8 @@ export const viewerUrl = (video) => {
 
 ## Abstract
 
-Music visualization can deepen listeners' understanding and experience by
-translating audio into visual form. Yet many existing approaches rely heavily on
+Music visualization can enhance listeners' understanding and experience by
+translating music into visual form. Yet many existing approaches rely heavily on
 lyrics or produce flat, non-immersive videos, limiting both their applicability to
 instrumental music and their ability to create an immersive listening experience.
 
@@ -111,7 +111,7 @@ this work is to use musical structure and continuous affect as
 conditions for an evolving, immersive scene.
 
 <div class="note-panel">
-  <strong>Scope.</strong> This work focuses on qualitative, immersive music
+  <strong>Scope of this work.</strong> This work focuses on qualitative, immersive music
   visualization. Our paper presents demonstrations with songs across different
   genres and qualitative comparison with From-Sound-To-Sight.
 </div>
@@ -147,7 +147,7 @@ retrained EmotiCrafter model to obtain an emotional residual. We use that
 residual with SEGA as guidance in the diffusion process, then use SDXL 360° LoRA
 to synthesize an emotion-aligned panoramic keyframe. Retraining EmotiCrafter
 with a custom dataset is intended to reduce unwanted human-activity artifacts
-and produce cleaner, scene-focused outputs (this is a limitation of the original paper).
+and produce cleaner, scene-focused outputs, addressing a limitation of the original model. 
 
 ### 3. Temporally connected 360° video
 
@@ -158,7 +158,7 @@ order yields the final 360° visualization.
 
 ## Results and demos
 
-The paper demonstrates that the pipeline can generate 360° videos viewable in a
+Our results demonstrate that the pipeline can generate 360° videos viewable in a
 VR headset. The visual atmosphere and transitions are designed to follow the
 estimated emotion conditions at different musical segments, while the four-bar
 units align scene generation with the song's temporal structure.
@@ -281,18 +281,18 @@ We compare our results with From-Sound-To-Sight, with 3 cases:
 ## Contributions
 
 - **Immersive music visualization.** We extend music-driven visual generation
-  toward a 360° format intended for VR viewing.
-- **Dynamic music emotion modeling.** The pipeline predicts valence–arousal
+  toward a 360° format designed for VR viewing.
+- **Dynamic music emotion modeling.** Our pipeline predicts valence–arousal
   conditions over four-bar units rather than using a single static mood to represent the whole song.
 - **Emotion-guided scene synthesis.** Emotional residuals guide panoramic
   keyframe generation while preserving a user-provided base scene concept.
 - **Structure-aware video assembly.** Dynamic scenes and transition clips are
-  arranged according to the song's temporal order.
+  arranged according to the temporal structure of the song.
 
 ## Limitations and future work
 
 Although this work addresses emotion-aware, structure-guided 360° music
-visualization, the present system has several limitations:
+visualization, the current system has several limitations:
 
 - Similar valence–arousal conditions can lead to repetitive keyframes.
 - Panoramic boundary inconsistencies can create visible seams.
@@ -302,8 +302,7 @@ visualization, the present system has several limitations:
 - Long prompts can cause a drift from generating omnidirectional imagery toward
   flat scenes.
 
-These constraints motivate future work on stronger 360° consistency, higher
-resolution generation, and more controllable immersive motion.
+These constraints motivate future work on stronger 360° consistency, higher-resolution generation, and more controllable immersive motion.
 
 ## Materials
 
